@@ -1,11 +1,12 @@
 $(document).ready(function() {
-  $(document).on("click", "#search", reset(), searchResult());
+  $(document).on("click", "#search", searchResult);
 
   function reset() {
     $("#article-div").empty;
   }
 
   function searchResult() {
+    event.preventDefault();
     //$("#article-div").empty;
     var search = $("#search-text").val();
     var queryURL =
@@ -20,11 +21,13 @@ $(document).ready(function() {
       var results = data.response.docs;
       $("#article-div").empty();
       for (var i = 0; i < 7; i++) {
-        var a = $("<div>");
-        a.addClass("title col-md-4");
+        var mainDiv = $("<div>");
+        mainDiv.addClass("col-md-4");
+        var a = $("<h4>");
+        a.addClass("title");
         a.attr("data-name", results[i].headline.print_headline);
         a.text(results[i].headline.print_headline);
-        $("#article-div").append(a);
+        $(mainDiv).append(a);
 
         var articleImg = $("<img>");
         articleImg.attr(
@@ -32,11 +35,12 @@ $(document).ready(function() {
           "https://static01.nyt.com/" + results[i].multimedia[0].url
         );
         articleImg.attr("class", "card-img-top");
-        $("#article-div").append(articleImg);
+        $(mainDiv).append(articleImg);
         var b = $("<div>");
         b.attr("data-name", results[i].snippet);
         b.text(results[i].snippet);
-        $("#article-div").append(b);
+        $(mainDiv).append(b);
+        $("#article-div").append(mainDiv);
       }
     });
   }
