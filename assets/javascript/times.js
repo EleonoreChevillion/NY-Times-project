@@ -25,10 +25,10 @@ $(document).ready(function() {
         mainDiv.addClass("col-md-4");
         var a = $("<h4>");
         a.addClass("title");
+        a.addClass("card-title");
         a.attr("data-name", results[i].headline.print_headline);
         a.text(results[i].headline.print_headline);
         $(mainDiv).append(a);
-
         var articleImg = $("<img>");
         articleImg.attr(
           "src",
@@ -37,9 +37,19 @@ $(document).ready(function() {
         articleImg.attr("class", "card-img-top");
         $(mainDiv).append(articleImg);
         var b = $("<div>");
+        b.addClass("card-text");
         b.attr("data-name", results[i].snippet);
         b.text(results[i].snippet);
         $(mainDiv).append(b);
+
+        var c = $("<button>");
+        c.addClass("btn btn-info");
+        c.addClass("moreInfo");
+        c.text("Learn more");
+        $(mainDiv).append(c);
+        $(".moreInfo").on("click", function() {
+          window.location = results[i].web_url;
+        });
         $("#article-div").append(mainDiv);
       }
     });
