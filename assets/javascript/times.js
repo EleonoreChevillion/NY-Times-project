@@ -43,7 +43,7 @@ $(document).ready(function() {
         $(mainDiv).append(b);
 
         var c = $("<button>");
-        c.addClass("btn btn-info");
+        c.addClass("btn btn-outline-info");
         c.addClass("moreInfo");
         c.text("Learn more");
         $(mainDiv).append(c);
